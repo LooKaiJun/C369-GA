@@ -82,9 +82,18 @@
         function handleSignup(event) {
             event.preventDefault();
             
+            // Get password and confirm password values
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return; // Stop form submission
+            }
+
             // Simulate a successful signup (in practice, you'd check the server response)
-            // Here we assume the signup is always successful for demonstration purposes
-            alert("Signup successful! You will be redirected to the login page.");
+            alert("Signup successful! You will be redirected to the Log In page.");
             window.location.href = "login.html";
         }
     </script>
@@ -92,7 +101,7 @@
 <body>
     <div class="signup-container">
         <h2>Sign Up</h2>
-        <form action="signup_process.php" method="post" onsubmit="handleSignup(event);">
+        <form onsubmit="handleSignup(event);">
             <div class="form-group">
                 <label for="username">Username:</label>
                 <input type="text" id="username" name="username" required>
