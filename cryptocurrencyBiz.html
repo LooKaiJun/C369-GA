@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invest in Cryptocurrency</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            background: linear-gradient(to right, #747576, #021e54);
+        }
+
+        .investment-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        select, input, textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0073e6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="investment-container">
+        <h2>Invest in Cryptocurrency</h2>
+        <form id="cryptocurrency-form">
+            <label for="crypto-type">Select Cryptocurrency:</label>
+            <select id="crypto-type" required>
+                <option value="" disabled selected>Select a cryptocurrency</option>
+                <option value="bitcoin">Bitcoin (BTC)</option>
+                <option value="ethereum">Ethereum (ETH)</option>
+                <option value="litecoin">Litecoin (LTC)</option>
+                <option value="ripple">Ripple (XRP)</option>
+            </select>
+
+            <label for="amount">Investment Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount" required>
+
+            <label for="comments">Comments (Optional):</label>
+            <textarea id="comments" rows="4" placeholder="Enter any comments"></textarea>
+
+            <button type="submit">Invest</button>
+        </form>
+        <a href="investmentBiz.html" class="back-link">Back to Investment Menu</a>
+    </div>
+
+    <script>
+        document.getElementById('cryptocurrency-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get investment details
+            const cryptoType = document.getElementById('crypto-type').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const comments = document.getElementById('comments').value || 'No comments';
+
+            // Retrieve current balance from local storage
+            let balance = parseFloat(localStorage.getItem('accountBalance')) || 0;
+
+            // Check if the user has enough balance
+            if (amount > balance) {
+                alert('Insufficient funds.');
+                return;
+            }
+
+            // Deduct the investment amount from the balance
+            balance -= amount;
+            localStorage.setItem('accountBalance', balance.toFixed(2));
+
+            // Create a new investment object
+            const newInvestment = {
+                type: 'cryptocurrency',
+                cryptoType: cryptoType,
+                amount: amount,
+                comments: comments,
+                dateTime: new Date().toISOString()
+            };
+
+            // Retrieve existing investments from local storage
+            let investments = JSON.parse(localStorage.getItem('investmentHistory')) || [];
+
+            // Add the new investment to the list
+            investments.push(newInvestment);
+
+            // Update local storage
+            localStorage.setItem('investmentHistory', JSON.stringify(investments));
+
+            // Alert user and redirect to portfolio page
+            alert('Your investment in cryptocurrency has been recorded.');
+            window.location.href = 'portfolioBiz.html'; // Redirect to portfolio or confirmation page
+        });
+    </script>
+</body>
+</html>
