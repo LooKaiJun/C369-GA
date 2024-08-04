@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for a Loan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            background: linear-gradient(to right, #747576, #021e54);
+        }
+
+        .loan-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        select, input {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0073e6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="loan-container">
+        <h2>Apply for a Loan</h2>
+        <form id="loan-form">
+            <label for="loan-type">Select Loan Type:</label>
+            <select id="loan-type" required>
+                <option value="" disabled selected>Select a loan type</option>
+                <option value="personal">Personal Loan</option>
+                <option value="home">Home Loan</option>
+                <option value="auto">Auto Loan</option>
+                <option value="student">Student Loan</option>
+            </select>
+
+            <label for="loan-amount">Loan Amount:</label>
+            <input type="number" id="loan-amount" placeholder="Enter amount" required>
+
+            <button type="submit">Apply</button>
+        </form>
+        <a href="personal.html" class="back-link">Back to Account Overview</a>
+    </div>
+
+    <script>
+        document.getElementById('loan-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get loan details
+            const loanType = document.getElementById('loan-type').value;
+            const loanAmount = parseFloat(document.getElementById('loan-amount').value);
+
+            // Update loan balance in local storage
+            let currentLoanBalance = parseFloat(localStorage.getItem('loanBalance')) || 0;
+            currentLoanBalance += loanAmount;
+            localStorage.setItem('loanBalance', currentLoanBalance.toFixed(2));
+
+            // Alert user and redirect to account overview page
+            alert('Your loan application has been submitted. Loan balance updated.');
+            window.location.href = 'personal.html';
+        });
+    </script>
+</body>
+</html>

@@ -31,10 +31,10 @@
             margin-bottom: 20px;
         }
 
-        .balance {
+        .balance, .loan-balance {
             text-align: center;
             font-size: 24px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .service-buttons {
@@ -73,15 +73,19 @@
 </head>
 <body>
     <div class="overview-container">
-        <h2>Personal Account Overview</h2>
+        <h2>Account Overview</h2>
         <div class="balance">
             <span>Bank Balance: $<span id="account-balance">0.00</span></span>
+        </div>
+        <div class="loan-balance">
+            <span>Loan Balance: $<span id="loan-balance">0.00</span></span>
         </div>
         <div class="service-buttons">
             <a href="onlineBankingMenu.html">Online Banking</a>
             <a href="transactionhistory.html">View Transaction History</a>
             <a href="topupcard.html">Add Money to Account</a>
             <a href="investment.html">Investment</a>
+            <a href="loan.html">Apply Loans</a>
             <a href="bankdetails.html">Bank Details</a>
         </div>
         <a href="service2.html" class="back-link">Back to Services</a>
@@ -94,8 +98,15 @@
             document.getElementById('account-balance').textContent = parseFloat(balance).toFixed(2);
         }
 
-        // Call the function to update the balance on page load
+        // Function to fetch and display the loan balance
+        function updateLoanBalance() {
+            const loanBalance = localStorage.getItem('loanBalance') || '0.00';
+            document.getElementById('loan-balance').textContent = parseFloat(loanBalance).toFixed(2);
+        }
+
+        // Call the functions to update the balance and loan balance on page load
         updateBalance();
+        updateLoanBalance();
     </script>
 </body>
 </html>

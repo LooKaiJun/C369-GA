@@ -98,7 +98,7 @@
 
             <button type="submit">Pay Loan</button>
         </form>
-        <a href="onlineBankingMenu.html" class="back-link">Back to Online Banking Menu</a>
+        <a href="personal.html" class="back-link">Back to Account Overview</a>
     </div>
 
     <script>
@@ -118,17 +118,22 @@
             }
 
             // Update the account balance
-            let balance = parseFloat(localStorage.getItem('accountBalance')) || 0;
-            if (balance < amount) {
+            let accountBalance = parseFloat(localStorage.getItem('accountBalance')) || 0;
+            if (accountBalance < amount) {
                 alert('Insufficient funds.');
                 return;
             }
-            balance -= amount;
-            localStorage.setItem('accountBalance', balance.toFixed(2));
+            accountBalance -= amount;
+            localStorage.setItem('accountBalance', accountBalance.toFixed(2));
+
+            // Update the loan balance
+            let loanBalance = parseFloat(localStorage.getItem('loanBalance')) || 0;
+            loanBalance -= amount;
+            localStorage.setItem('loanBalance', loanBalance.toFixed(2));
 
             // Create a new transaction object
             const newTransaction = {
-                dateTime: new Date().toISOString(), // ISO format for date and time
+                dateTime: new Date().toISOString(),
                 recipient: loanAccount,
                 message: `Loan payment for ${loanType}: ${description}`,
                 amount: -amount // Amount is negative as it is a debit
