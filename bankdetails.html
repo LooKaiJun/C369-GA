@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            background: linear-gradient(to right, #747576, #021e54);
+        }
+
+        .details-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .detail-item {
+            margin-bottom: 15px;
+        }
+
+        .detail-item label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .detail-item span {
+            display: block;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="details-container">
+        <h2>Bank and Card Details</h2>
+        <div class="detail-item">
+            <label for="bank-name">Bank Name:</label>
+            <span id="bank-name">Loading...</span>
+        </div>
+        <div class="detail-item">
+            <label for="account-number">Account Number:</label>
+            <span id="account-number">Loading...</span>
+        </div>
+        <div class="detail-item">
+            <label for="card-number">Card Number:</label>
+            <span id="card-number">Loading...</span>
+        </div>
+        <div class="detail-item">
+            <label for="card-expiry">Card Expiry Date:</label>
+            <span id="card-expiry">Loading...</span>
+        </div>
+        <div class="detail-item">
+            <label for="card-holder">Card Holder Name:</label>
+            <span id="card-holder">Loading...</span>
+        </div>
+        <a href="personal.html" class="back-link">Back to Personal Account Overview</a>
+    </div>
+
+    <script>
+        // Retrieve bank and card details from local storage
+        const bankName = localStorage.getItem('bankName') || 'OF Banking';
+        const accountNumber = localStorage.getItem('accountNumber') || '111-12345-0';
+        const cardNumber = localStorage.getItem('cardNumber') || '4123-0987-5678-1234';
+        const cardExpiry = localStorage.getItem('cardExpiry') || '12/30';
+        const cardHolder = localStorage.getItem('cardHolder') || 'LOO KAI JUN';
+
+        // Display the details
+        document.getElementById('bank-name').textContent = bankName;
+        document.getElementById('account-number').textContent = accountNumber;
+        document.getElementById('card-number').textContent = cardNumber;
+        document.getElementById('card-expiry').textContent = cardExpiry;
+        document.getElementById('card-holder').textContent = cardHolder;
+    </script>
+</body>
+</html>

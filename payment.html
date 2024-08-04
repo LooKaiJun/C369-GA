@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #747576, #021e54);
+            height: 100vh;
+            margin: 0;
+        }
+
+        .payment-selection-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .payment-option {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .payment-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .payment-option img {
+            max-width: 100px;
+            margin-bottom: 10px;
+        }
+
+        .payment-option p {
+            margin: 10px 0;
+            color: #777;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #3294bb;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script>
+        function handleSelection(paymentMethod) {
+            switch(paymentMethod) {
+                case 'paynow':
+                    window.location.href = "paynow.html";
+                    break;
+                case 'grabpay':
+                    window.location.href = "grabpay.html";
+                    break;
+                case 'credit-debit':
+                    window.location.href = "credit.html";
+                    break;
+                default:
+                    alert('Invalid selection.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="payment-selection-container">
+        <h2>Select Your Payment Method</h2>
+        
+        <div class="payment-option" onclick="handleSelection('paynow')">
+            <img src="paynow.jpg" alt="PayNow">
+            <p>PayNow</p>
+        </div>
+        
+        <div class="payment-option" onclick="handleSelection('grabpay')">
+            <img src="grabpay.jpg" alt="GrabPay">
+            <p>GrabPay</p>
+        </div>
+        
+        <div class="payment-option" onclick="handleSelection('credit-debit')">
+            <img src="cd.jpg" alt="Credit/Debit Card">
+            <p>Credit/Debit Card</p>
+        </div>
+        
+        <a href="subscription.html" class="back-link">Back to Subscription Plans</a>
+    </div>
+</body>
+</html>

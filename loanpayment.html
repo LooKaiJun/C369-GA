@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            background: linear-gradient(to right, #747576, #021e54);
+        }
+
+        .payment-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        select, input, textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0073e6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Loan Payment</h2>
+        <form id="loan-payment-form">
+            <label for="loan-type">Select Loan Type:</label>
+            <select id="loan-type" required>
+                <option value="">-- Select Loan Type --</option>
+                <option value="bank-loan">Bank Loan</option>
+                <option value="student-loan">Student Loan</option>
+                <option value="others">Others</option>
+            </select>
+
+            <label for="loan-account">Loan Account Number:</label>
+            <input type="text" id="loan-account" placeholder="Enter loan account number" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" rows="4" placeholder="Enter description (optional)"></textarea>
+
+            <button type="submit">Pay Loan</button>
+        </form>
+        <a href="onlineBankingMenu.html" class="back-link">Back to Online Banking Menu</a>
+    </div>
+
+    <script>
+        document.getElementById('loan-payment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get payment details
+            const loanType = document.getElementById('loan-type').value;
+            const loanAccount = document.getElementById('loan-account').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const description = document.getElementById('description').value || 'No description';
+
+            // Validate amount
+            if (isNaN(amount) || amount <= 0) {
+                alert('Please enter a valid amount.');
+                return;
+            }
+
+            // Update the account balance
+            let balance = parseFloat(localStorage.getItem('accountBalance')) || 0;
+            if (balance < amount) {
+                alert('Insufficient funds.');
+                return;
+            }
+            balance -= amount;
+            localStorage.setItem('accountBalance', balance.toFixed(2));
+
+            // Create a new transaction object
+            const newTransaction = {
+                dateTime: new Date().toISOString(), // ISO format for date and time
+                recipient: loanAccount,
+                message: `Loan payment for ${loanType}: ${description}`,
+                amount: -amount // Amount is negative as it is a debit
+            };
+
+            // Retrieve existing transactions from local storage
+            let transactions = JSON.parse(localStorage.getItem('transactionHistory')) || [];
+
+            // Add the new transaction to the list
+            transactions.push(newTransaction);
+
+            // Update local storage
+            localStorage.setItem('transactionHistory', JSON.stringify(transactions));
+
+            // Alert user and redirect
+            alert('Loan payment successful.');
+            window.location.href = 'transactionhistory.html';
+        });
+    </script>
+</body>
+</html>

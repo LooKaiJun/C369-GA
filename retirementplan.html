@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invest in Retirement Plan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            background: linear-gradient(to right, #747576, #021e54);
+        }
+
+        .investment-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        select, input, textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #0073e6;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005bb5;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #0073e6;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="investment-container">
+        <h2>Invest in Retirement Plan</h2>
+        <form id="retirement-plan-form">
+            <label for="plan-type">Select Retirement Plan:</label>
+            <select id="plan-type" required>
+                <option value="" disabled selected>Select a plan</option>
+                <option value="401k">401(k)</option>
+                <option value="ira">IRA</option>
+                <option value="roth-ira">Roth IRA</option>
+                <option value="pension">Pension Fund</option>
+            </select>
+
+            <label for="amount">Investment Amount:</label>
+            <input type="number" id="amount" placeholder="Enter amount" required>
+
+            <label for="comments">Comments (Optional):</label>
+            <textarea id="comments" rows="4" placeholder="Enter any comments"></textarea>
+
+            <button type="submit">Invest</button>
+        </form>
+        <a href="investment.html" class="back-link">Back to Investment Menu</a>
+    </div>
+
+    <script>
+        document.getElementById('retirement-plan-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Get investment details
+            const planType = document.getElementById('plan-type').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const comments = document.getElementById('comments').value || 'No comments';
+
+            // Retrieve current balance from local storage
+            let balance = parseFloat(localStorage.getItem('accountBalance')) || 0;
+
+            // Check if the user has enough balance
+            if (amount > balance) {
+                alert('Insufficient funds.');
+                return;
+            }
+
+            // Deduct the investment amount from the balance
+            balance -= amount;
+            localStorage.setItem('accountBalance', balance.toFixed(2));
+
+            // Create a new investment object
+            const newInvestment = {
+                type: 'retirement-plan',
+                planType: planType,
+                amount: amount,
+                comments: comments,
+                dateTime: new Date().toISOString()
+            };
+
+            // Retrieve existing investments from local storage
+            let investments = JSON.parse(localStorage.getItem('investmentHistory')) || [];
+
+            // Add the new investment to the list
+            investments.push(newInvestment);
+
+            // Update local storage
+            localStorage.setItem('investmentHistory', JSON.stringify(investments));
+
+            // Alert user and redirect to portfolio page
+            alert('Your investment in a retirement plan has been recorded.');
+            window.location.href = 'portfolio.html'; // Redirect to portfolio or confirmation page
+        });
+    </script>
+</body>
+</html>

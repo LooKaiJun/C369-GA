@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to right, #747576, #021e54);
+            height: 100vh;
+            margin: 0;
+        }
+
+        .payment-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .payment-form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .payment-form input[type="text"], .payment-form input[type="email"], .payment-form input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .payment-form button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #3294bb;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .payment-form button:hover {
+            background-color: #00638a;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #3294bb;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Complete Your Payment</h2>
+        <form class="payment-form" id="payment-form" onsubmit="handlePayment(event);">
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9123 4567" required>
+            
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+            
+            <label for="cvv">CVV:</label>
+            <input type="number" id="cvv" name="cvv" placeholder="123" required>
+            
+            <label for="name">Cardholder's Name:</label>
+            <input type="text" id="name" name="name" required>
+            
+            <button type="submit">Pay Now</button>
+        </form>
+        <a href="payment.html" class="back-link">Choose a different payment method</a>
+    </div>
+
+    <script>
+        function handlePayment(event) {
+            event.preventDefault();
+
+            // Simulate payment processing
+            alert('Payment successful! Thank you for subscribing. An E-receipt will be sent to you within 10-15 minutes.');
+
+            // Redirect to a confirmation or thank you page
+            window.location.href = "thankyou.html";
+        }
+    </script>
+</body>
+</html>

@@ -81,8 +81,20 @@
     <script>
         function handleLogin(event) {
             event.preventDefault();
-            // Add your authentication logic here
-            // For now, we simply redirect to the OTP page
+
+            // Get the password value
+            const password = document.getElementById('password').value;
+
+            // Check if the password length is at least 6 characters
+            if (password.length < 6) {
+                alert("Login unsuccessful. Password must be at least 6 characters long.");
+                return; // Stop form submission
+            }
+
+            // Simulate sending OTP
+            alert("An OTP has been sent to you.");
+
+            // Redirect to OTP page
             window.location.href = "otp.html";
         }
     </script>

@@ -55,25 +55,7 @@
         }
         .logout {
             margin-left: auto; /* Pushes the logout link to the right end */
-        }
-        button {
-            background-color: #3498db; /* Button background color */
-            border: none; /* Remove default border */
-            color: white; /* Text color */
-            padding: 10px 20px; /* Padding around the text */
-            text-align: center; /* Center text */
-            text-decoration: none; /* Remove default underline */
-            display: inline-block; /* Inline block element */
-            font-size: 16px; /* Font size */
-            margin: 10px 0; /* Margin around the button */
-            cursor: pointer; /* Cursor changes to pointer on hover */
-            border-radius: 5px; /* Rounded corners */
-            transition: background-color 0.3s, transform 0.3s; /* Smooth transition for background and transform */
-        }
-        button:hover {
-            background-color: #2980b9; /* Background color on hover */
-            transform: scale(1.05); /* Slightly enlarge button on hover */
-        }
+        }   
     </style>
 </head>
 <body>
@@ -89,21 +71,27 @@
         <h1>OF Banking</h1>
     </header>
     <main>
-        <h2>Greetings, Welcome Back!</h2>
-        <p>We're glad to have you back.</p>
-        <p><br></p>
-        <button onclick="window.location.href='service2.html'">View Our Services</button>
+        <h2>Our Services</h2>
+        <div class="service">
+            <h3><a href="personal.html">Personal Banking</a></h3>
+            <p>We offer a range of personal banking services including savings and checking accounts, personal loans, and credit cards.</p>
+        </div>
+        <div class="service">
+            <h3><a href="business.html">Business Banking</a></h3>
+            <p>Our business banking solutions are designed to help businesses of all sizes manage their finances, from business accounts to commercial loans.</p>
+        </div>
+        <div class="service">
+            <h3><a href="investment.html">Investment Services</a></h3>
+            <p>Our investment services provide a variety of options to help you grow your wealth, including mutual funds, stocks, and retirement plans.</p>
+        </div>
+        <div class="service">
+            <h3><a href="onlineBankingMenu.html">Online and Mobile Banking</a></h3>
+            <p>Manage your accounts on the go with our online and mobile banking services, offering convenience and security at your fingertips.</p>
+        </div>
+        <div class="service">
+            <h3><a href="subscription.html">AI-Powered Fraud Detection</a></h3>
+            <p>This will enhance security through early detection of fraud, reducing financial loses, and boost customers' trust.</p>
+        </div>
     </main>
-    <script>
-        function handleLogout(event) {
-            event.preventDefault(); // Prevent the default action of the link
-            
-            // Display an alert to the user
-            alert("You have been logged out.");
-            
-            // Redirect to the home page
-            window.location.href = "index.html";
-        }
-    </script>
 </body>
 </html>
